@@ -1,9 +1,12 @@
+#!/usr/bin/env node
+
 import * as readline from "node:readline/promises";
 import * as fs from "node:fs/promises";
 
 import chalk from "chalk";
 
 import { stdin, stdout } from "node:process";
+import { listItems } from "./fs.js";
 
 const rl = readline.createInterface({
   input: stdin,
@@ -27,6 +30,8 @@ async function deleteFolder(folderpath) {
 }
 
 async function menu() {
+  console.clear();
+
   console.log(chalk.blue.bold(`\n 📁 file manager \n`));
 
   const options = [
@@ -88,7 +93,35 @@ async function menu() {
 
       console.log("folder delete");
       break;
+
+    case "6":
+      const listpath = await rl.question(
+        chalk.cyan("Folder path (Enter for current): "),
+      );
+
+      const items = await listItems(listpath || "./");
+
+      console.log("\nContents:");
+
+      items.forEach((item) => {
+        const icon = item.type == "folder" ? "📁 " : "📄";
+
+        console.log(`${icon} ${chalk.yellow(item.name)}`);
+      });
+      break;
+
+    case "7":
+      rl.close();
+
+      return;
+
+    default:
+      console.log(chalk.red("⚠️ Invaild options"));
   }
+
+  await rl.question(chalk.green("\n press Enter to contiue...."));
+
+  menu();
 }
 
 menu();
