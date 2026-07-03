@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import os, { cpus } from "node:os";
 
 function monitor() {
@@ -14,6 +15,7 @@ function monitor() {
       };
     });
     console.clear();
+    console.log(chalk.bgMagenta("====== style sheet===="));
     console.table(Usage);
 
     const usedMemory = (os.totalmem() - os.freemem()) / (1024 * 1024 * 1024);

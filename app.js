@@ -1,7 +1,7 @@
-// console.log("hello node.js!");
+console.log("hello node.js!");
 // console.log(process);
 // console.log(process.argv);
-// console.log(process.argv[2], process.argv[3]);
+console.log(process.argv[2], process.argv[3]);
 
 // const greet = require(`./greet`);
 // import greet from "./greet.js";
