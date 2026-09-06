@@ -1,95 +1,80 @@
 // import * as fs from "node:fs";
 import * as fs from "node:fs/promises";
-import { type } from "node:os";
-import path from "node:path";
 
-export async function listItems(listPath = "./") {
-  const items = await fs.readdir(listPath, { withFileTypes: true });
-
-  return items.map((item) => {
-    return {
-      name: item.name,
-      type: item.isDirectory() ? "folder" : "file",
-      path: path.join(import.meta.dirname, item.name),
-    };
-  });
-  console.log(items);
-}
-listItems();
-
-async function deleteFolder(folderpath) {
-  await fs.rm(folderpath, { recursive: true });
-}
-
-async function deleteFile(filepath) {
-  await fs.unlink(filepath);
-}
-
-async function readFile(pathname) {
-  const data = await fs.readFile(pathname, "utf-8");
-
-  console.log("data", data);
-}
-
-async function createFolder(foldername) {
-  await fs.mkdir(foldername, { recursive: true });
-}
-
-async function appendFile(pathname, content = "") {
-  await fs.appendFile(pathname, content);
-}
-
-async function createFile(pathname, content = "") {
-  await fs.writeFile(pathname, content);
-}
-createFile("./hello.txt", "hello.js\n");
+//  async function listItems(listpath = "./") {
+//   const items = await fs.readdir(listpath, { withFileTypes: true });
+//   console.log(items);
+// }
+// listItems();
 
 // async function getFileInfo(filepath) {
 //   const stats = await fs.stat(filepath);
-//   console.log(stats);
+//   return {
+//     size: `${(stats.size / 1024).toFixed(2)} KB`,
+//     created: stats.birthtime.toLocaleString(),
+//   };
+// }
+// getFileInfo("./hero.txt").then((data) => {
+//   console.log("data", data);
+// });
+// async function deleteFolder(folderpath) {
+//   await fs.rm(folderpath, {recursive : true})
+// }
+// deleteFolder('./foldername')
+// async function deleteFile (pathname) {
+//   await fs.unlink(pathname)
+// }
+// deleteFile('./anyfile')
+
+// async function readFile(pathname) {
+//   const data = await fs.readFile(pathname, "utf-8");
+//   console.log("data", data);
 // }
 
-// getFileInfo("./hello.txt");
+// readFile("./hero.txt");
 
-// deleteFolder("./contents/images/logos");
-// deleteFile("./hello.txt");
-// createFolder("./contents/images/logos");
-// readFile("./hello.txt");
+// async function createFolder(folderpath) {
+//   await fs.mkdir(folderpath, { recursive: true });
+// }
 
+// async function createFile(pathname, contact = "") {
+//   await fs.writeFile(pathname, contact);
+// }
+// createFolder("./contact/image/logo");
 // async function createFile(pathname) {
 //   try {
-//     await fs.writeFile(pathname, "hello.javascript\n");
-//     await fs.appendFile(pathname, "hello.js");
+//     await fs.writeFile(pathname, "hello.js\n");
+//     await fs.appendFile(pathname, "hello javascript");
 //   } catch (error) {
 //     console.log("err", err);
 //   }
 
-//   console.log("file writting!");
+//   console.log("file has been created");
 // }
-// createFile("./hello.txt");
 
+// createFile("./hero.txt");
 // function createFile(pathname) {
-// promises
-// sync
-//   fs.writeFileSync(pathname, "Hello node.js!\n");
-//   fs.appendFileSync(pathname, "hello javascript");
-// async
-// Error first callbacks
-//   fs.writeFile(pathname, "Hello node.js!\n", (err) => {
+// fs.writeFileSync(pathname, "hello node.js\n");
+// fs.appendFileSync(pathname, "hello javascript");
+// console.log("file has been create");
+// error first callback
+//   fs.writeFile(pathname, "hello node.js\n", (err) => {
 //     if (err) {
-//       console.log("file not created");
+//       console.log("something went wrong while creating file");
 //       return;
 //     }
-//     console.log("File has been created asynchrounes");
+
+//     fs.appendFile(pathname, "hello javascript\n", (err) => {
+//       if (err) {
+//         console.log("something went wrong while creating file");
+//         return;
+//       }
+//       console.log("file has been created");
+//     });
+//     console.log("file has been created");
 //   });
-//   fs.appendFile(pathname, "Hello node.js javascript", (err) => {
-//     if (err) {
-//       console.log("file not created");
-//       return;
-//     }
-//     console.log("File has been created asynchrounes");
-//   });
-//   console.log("file operation done!");
+
+//   console.log("file ooperation done");
 // }
 
 // createFile("./hello.txt");

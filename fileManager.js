@@ -2,16 +2,32 @@
 
 import * as readline from "node:readline/promises";
 import * as fs from "node:fs/promises";
+import path from "node:path";
 
 import chalk from "chalk";
 
 import { stdin, stdout } from "node:process";
-import { listItems } from "./fs.js";
+// import { listItems } from "./fs.js";
 
 const rl = readline.createInterface({
   input: stdin,
   output: stdout,
 });
+
+async function listItems(listpath = "./") {
+  const items = await fs.readdir(listpath, { withFileTypes: true });
+  return items.map((item) => {
+    return {
+      name: item.name,
+      type: item.isDirectory() ? "folder" : "file",
+      path: path.join(import.meta.dirname, item.name),
+    };
+  });
+
+  console.log(items);
+}
+listItems();
+
 async function createFolder(pathname) {
   await fs.mkdir(pathname, { recursive: true });
 }

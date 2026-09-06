@@ -1,1 +1,2 @@
-hello.js
+hello node.js
+hello javascript
